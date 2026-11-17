@@ -112,7 +112,6 @@ body {
 /* 页面切换动画 */
 #page > * {
   animation: pageIn 0.28s ease;
-  height: 100%;
 }
 
 @keyframes pageIn {
