@@ -16,9 +16,11 @@ Big-icon launcher; learned-letters progress shown on the ABC card.
 - 🎆 自动秀模式 / 🔊 程序化音效 / 烟花效果随屏幕大小自适应
 - Tap the sky! 7 firework types, auto-show mode, procedural sound effects.
 
-## 🔤 学字母 ABC Land
+## 🔤 学字母 ABC Land（字母墙 / 学习 / 描红 / 考试，一个应用全包）
 
-- **字母墙**：A–Z 大格子，学过的盖 ⭐ 章（本地记忆进度）
+字母显示使用**手写体**（Patrick Hand，iPad 上回退 Chalkboard SE/Comic Sans），小写 a/g 等为单层书写字形，贴近孩子手写作业的字母形状。
+
+- **字母墙**：A–Z 大格子，学过的盖 ⭐ 章（本地记忆进度）；右上角"去考试"直达测验
 - **学习页**：大写金色/小写蓝色点读发音，单词卡 emoji 配图（点卡片听单词读音），中英对照
 - **描红跟写**：虚线字母引导 + 手指描摹容差检测 + 完成度进度条，写完语音鼓励
 - **字母考试**：自由勾选几个 / 一键全部 / 从 X 到 Y 区间选字母（可组合），三种题型随机：听音找字母、大小写配对、看图找首字母；答错可重试无惩罚，满分有奖杯；结算可一键"放烟花庆祝"跳回烟花模块自动秀

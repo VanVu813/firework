@@ -75,11 +75,13 @@
   font-weight: 800;
   line-height: 1;
   color: #ffd93d;
+  font-family: var(--hand-font);
 }
 
 .wall-low {
   font-size: 26px;
   color: #8fd3ff;
+  font-family: var(--hand-font);
 }
 
 .wall-star {
@@ -137,6 +139,7 @@
   font-weight: 800;
   line-height: 1.05;
   color: #ffd93d;
+  font-family: var(--hand-font);
 }
 
 .bl-low .bl-char {
@@ -144,6 +147,7 @@
   font-weight: 800;
   line-height: 1.05;
   color: #8fd3ff;
+  font-family: var(--hand-font);
 }
 
 .bl-tag {
@@ -458,6 +462,7 @@
   font-size: clamp(56px, 12vh, 96px);
   font-weight: 800;
   line-height: 1;
+  font-family: var(--hand-font);
 }
 
 .quiz-opt-char.opt-lower {

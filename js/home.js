@@ -4,11 +4,11 @@
 mergeI18n({
   zh: {
     fwName: '放烟花', abcName: '学字母', coming: '即将上线',
-    quizEntry: '字母考试', quizSub: '听音选字母 · 大小写配对',
+    abcSub: '字母 · 单词 · 描红 · 考试',
   },
   en: {
     fwName: 'Fireworks', abcName: 'ABC Land', coming: 'Coming soon',
-    quizEntry: 'ABC Quiz', quizSub: 'Listen & match letters',
+    abcSub: 'Letters · Words · Tracing · Quiz',
   },
 });
 
@@ -25,10 +25,9 @@ Pages.home = {
     el.innerHTML = `
       <div class="home-grid">
         ${card('🎆', App.t('fwName'), 'Fireworks', '#/fireworks')}
-        ${card('🔤', App.t('abcName'), 'ABC · a~z', '#/abc',
+        ${card('🔤', App.t('abcName'), App.t('abcSub'), '#/abc',
                '',
                learned ? `<span class="card-badge">⭐ ${learned}/26</span>` : '')}
-        ${card('📝', App.t('quizEntry'), App.t('quizSub'), '#/abc/quiz')}
         ${card('🔢', App.t('coming'), 'Numbers', '', 'disabled')}
         ${card('🎨', App.t('coming'), 'Drawing', '', 'disabled')}
         ${card('🎵', App.t('coming'), 'Music', '', 'disabled')}
