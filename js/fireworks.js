@@ -3,19 +3,27 @@
 const PARTICLE_GRAVITY = 0.045;
 const AIR_RESIST = 0.985;
 
+// 全局缩放：烟花尺寸/速度随屏幕大小自适应，并整体放大 1.15 倍
+const FW = { s: 1.15, n: 1 };
+function setFireworkScale(minDimPx) {
+  FW.s = Math.min(2.2, Math.max(0.9, minDimPx / 700)) * 1.15;
+  FW.n = Math.min(1.8, Math.max(1, minDimPx / 700));
+}
+
 class Particle {
   constructor(opts) {
+    const s = FW.s;
     this.x = opts.x;
     this.y = opts.y;
-    this.vx = opts.vx || 0;
-    this.vy = opts.vy || 0;
+    this.vx = (opts.vx || 0) * s;
+    this.vy = (opts.vy || 0) * s;
     this.color = opts.color;
-    this.size = opts.size || 2;
+    this.size = (opts.size || 2) * s;
     this.alpha = 1;
     this.decay = opts.decay || (0.008 + Math.random() * 0.01);
     this.behavior = opts.behavior || 'gravity';
-    this.gravity = opts.gravity !== undefined ? opts.gravity : PARTICLE_GRAVITY;
-    this.sway = opts.sway || 0;          // 左右摇摆幅度（樱花雨等）
+    this.gravity = (opts.gravity !== undefined ? opts.gravity : PARTICLE_GRAVITY) * s;
+    this.sway = (opts.sway || 0) * s;    // 左右摇摆幅度（樱花雨等）
     this.phase = Math.random() * Math.PI * 2;
     this.flicker = opts.flicker || false; // 金色闪烁
   }
@@ -78,7 +86,7 @@ const FireworkTypes = {
   // 🌸 樱花雨：粉色粒子，缓缓飘落摇摆
   sakura(x, y) {
     const ps = [];
-    const count = 70 + Math.floor(Math.random() * 20);
+    const count = Math.round((70 + Math.floor(Math.random() * 20)) * FW.n);
     for (let i = 0; i < count; i++) {
       const angle = Math.random() * Math.PI * 2;
       const speed = 0.8 + Math.random() * 2.8;
@@ -102,7 +110,7 @@ const FireworkTypes = {
     const ps = [];
     const layers = 3;
     for (let l = 0; l < layers; l++) {
-      const count = 50;
+      const count = Math.round(50 * FW.n);
       const baseSpeed = 1.2 + l * 1.3;
       for (let i = 0; i < count; i++) {
         const angle = (Math.PI * 2 * i) / count + l * 0.06;
@@ -125,7 +133,7 @@ const FireworkTypes = {
   // 🌈 彩虹环：彩色圆环均匀扩散
   rainbowRing(x, y) {
     const ps = [];
-    const count = 90;
+    const count = Math.round(90 * FW.n);
     for (let i = 0; i < count; i++) {
       const angle = (Math.PI * 2 * i) / count;
       const speed = 3.2 + Math.random() * 0.2;
@@ -147,7 +155,7 @@ const FireworkTypes = {
     const ps = [];
     const layers = 4;
     for (let l = 0; l < layers; l++) {
-      const count = 60;
+      const count = Math.round(60 * FW.n);
       const baseSpeed = 1.5 + l * 1.1;
       for (let i = 0; i < count; i++) {
         const angle = (Math.PI * 2 * i) / count + l * 0.13;
@@ -171,8 +179,8 @@ const FireworkTypes = {
   // ❤️ 爱心：粒子组成爱心形状
   heart(x, y) {
     const ps = [];
-    const count = 80;
-    const scale = 0.42;
+    const count = Math.round(80 * FW.n);
+    const scale = 0.42 * FW.s;
     for (let i = 0; i < count; i++) {
       const t = (Math.PI * 2 * i) / count;
       // 爱心参数方程
@@ -195,7 +203,7 @@ const FireworkTypes = {
   // 🐟 流星鱼：粒子呈流线型游动 + 摇摆尾巴
   meteorFish(x, y) {
     const ps = [];
-    const count = 55;
+    const count = Math.round(55 * FW.n);
     const headAngle = Math.random() * Math.PI * 2;
     for (let i = 0; i < count; i++) {
       const ratio = i / count; // 0=头 1=尾
@@ -244,7 +252,7 @@ class Rocket {
     this.ty = ty;
     this.color = color;
     this.type = type || 'chrysanthemum';
-    this.speed = 9 + Math.random() * 2;
+    this.speed = (9 + Math.random() * 2) * FW.s;
     const dx = tx - sx;
     const dy = ty - sy;
     const dist = Math.hypot(dx, dy) || 1;

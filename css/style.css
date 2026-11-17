@@ -12,6 +12,8 @@ html, body {
   touch-action: none;
   -webkit-user-select: none;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
   font-family: "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif;
 }
 
@@ -135,4 +137,85 @@ html, body {
 @keyframes hintFloat {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* ---------- 小屏手机竖屏 ---------- */
+@media (max-width: 600px) {
+  #topbar {
+    top: 8px;
+    right: 8px;
+    gap: 6px;
+  }
+
+  .tool-btn {
+    font-size: 13px;
+    padding: 8px 11px;
+  }
+
+  #hint {
+    font-size: 13px;
+    padding: 6px 14px;
+    top: 10px;
+    max-width: 60vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #selector {
+    bottom: 10px;
+    padding: 8px 10px;
+    gap: 7px;
+    border-radius: 18px;
+  }
+
+  .fw-item {
+    padding: 6px 8px;
+    border-radius: 13px;
+  }
+
+  .fw-emoji {
+    font-size: 24px;
+  }
+
+  .fw-name {
+    font-size: 11px;
+  }
+}
+
+/* ---------- 手机横屏 / 矮屏 ---------- */
+@media (max-height: 500px) {
+  #topbar {
+    top: 6px;
+    right: 6px;
+  }
+
+  .tool-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  #hint {
+    display: none;
+  }
+
+  #selector {
+    bottom: 6px;
+    padding: 5px 8px;
+    gap: 6px;
+  }
+
+  .fw-item {
+    padding: 4px 7px;
+    flex-direction: row;
+    gap: 4px;
+  }
+
+  .fw-emoji {
+    font-size: 20px;
+  }
+
+  .fw-name {
+    font-size: 11px;
+  }
 }

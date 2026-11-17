@@ -31,6 +31,7 @@ function resize() {
   canvas.style.width = window.innerWidth + 'px';
   canvas.style.height = window.innerHeight + 'px';
   initStars();
+  setFireworkScale(Math.min(window.innerWidth, window.innerHeight));
 }
 
 function drawSky(t) {
@@ -58,7 +59,8 @@ function drawSky(t) {
 function drawMoon() {
   const r = Math.min(W, H) * 0.05;
   const x = W * 0.82;
-  const y = H * 0.14;
+  // 手机横屏等矮屏时，月亮下移避免与右上角按钮重叠
+  const y = window.innerHeight < 500 ? H * 0.38 : H * 0.14;
   ctx.fillStyle = '#fdf6d8';
   ctx.beginPath();
   ctx.arc(x, y, r, 0, Math.PI * 2);
@@ -135,5 +137,6 @@ function loop(t) {
 }
 
 window.addEventListener('resize', resize);
+window.addEventListener('orientationchange', () => setTimeout(resize, 100));
 resize();
 requestAnimationFrame(loop);
