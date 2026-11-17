@@ -1,3 +1,6 @@
+'use strict';
+
+/* ---------- 基础 ---------- */
 * {
   margin: 0;
   padding: 0;
@@ -17,21 +20,36 @@ html, body {
   font-family: "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif;
 }
 
-#sky {
-  display: block;
-  width: 100%;
-  height: 100%;
-  cursor: crosshair;
+body {
+  display: flex;
+  flex-direction: column;
 }
 
-/* ---------- 顶部工具栏 ---------- */
-#topbar {
-  position: fixed;
-  top: 10px;
-  right: 10px;
+.hidden {
+  display: none !important;
+}
+
+/* ---------- 外壳顶栏 ---------- */
+#shell-bar {
+  flex: 0 0 auto;
   display: flex;
-  gap: 8px;
-  z-index: 10;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(15, 15, 40, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 20;
+}
+
+#shell-title {
+  color: #ffd93d;
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.bar-spacer {
+  flex: 1;
 }
 
 .tool-btn {
@@ -56,175 +74,99 @@ html, body {
   color: #4a2c00;
 }
 
-.tool-btn span {
-  margin-left: 4px;
+/* ---------- 页面容器 ---------- */
+#page {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
 }
 
-/* ---------- 烟花选择栏 ---------- */
-#selector {
-  position: fixed;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  padding: 10px 14px;
-  background: rgba(20, 20, 50, 0.55);
-  border-radius: 22px;
-  backdrop-filter: blur(8px);
-  z-index: 10;
-  max-width: 94vw;
-  overflow-x: auto;
-  scrollbar-width: none;
+/* ---------- 首页启动台 ---------- */
+.home-grid {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 28px;
+  align-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow-y: auto;
 }
 
-#selector::-webkit-scrollbar {
-  display: none;
-}
-
-.fw-item {
-  flex: 0 0 auto;
+.app-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  border: 2px solid transparent;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.08);
+  justify-content: center;
+  gap: 8px;
+  min-height: 160px;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 26px;
+  background: linear-gradient(160deg, rgba(60, 60, 130, 0.5), rgba(25, 25, 60, 0.6));
   color: #fff;
-  padding: 8px 10px;
   cursor: pointer;
-  transition: transform 0.15s, border-color 0.15s, background 0.15s;
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 
-.fw-item:hover {
-  transform: translateY(-3px) scale(1.05);
-}
-
-.fw-item.selected {
+.app-card:hover:not(:disabled) {
+  transform: translateY(-4px) scale(1.03);
   border-color: #ffd93d;
-  background: rgba(255, 217, 61, 0.22);
-  box-shadow: 0 0 12px rgba(255, 217, 61, 0.5);
+  box-shadow: 0 8px 24px rgba(255, 217, 61, 0.25);
 }
 
-.fw-emoji {
-  font-size: 28px;
+.app-card:disabled {
+  opacity: 0.38;
+  cursor: default;
+}
+
+.card-emoji {
+  font-size: 54px;
   line-height: 1;
 }
 
-.fw-name {
-  font-size: 12px;
-  white-space: nowrap;
+.card-zh {
+  font-size: 22px;
+  font-weight: 700;
 }
 
-/* ---------- 提示语 ---------- */
-#hint {
-  position: fixed;
-  top: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 16px;
-  padding: 8px 18px;
-  background: rgba(20, 20, 50, 0.45);
+.card-en {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.card-badge {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 13px;
+  background: rgba(255, 217, 61, 0.9);
+  color: #4a2c00;
+  padding: 3px 10px;
   border-radius: 999px;
-  backdrop-filter: blur(6px);
-  z-index: 10;
-  pointer-events: none;
-  animation: hintFloat 2.5s ease-in-out infinite;
+  font-weight: 700;
 }
 
-@keyframes hintFloat {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-5px); }
-}
-
+/* ---------- 小屏适配 ---------- */
 @media (max-width: 600px) {
-  @keyframes hintFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
+  #shell-title { font-size: 17px; }
+  .tool-btn { font-size: 13px; padding: 8px 11px; }
+  .home-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 18px;
   }
+  .app-card { min-height: 130px; border-radius: 20px; }
+  .card-emoji { font-size: 42px; }
+  .card-zh { font-size: 18px; }
 }
 
-/* ---------- 小屏手机竖屏 ---------- */
-@media (max-width: 600px) {
-  #topbar {
-    top: 8px;
-    right: 8px;
-    gap: 6px;
-  }
-
-  .tool-btn {
-    font-size: 13px;
-    padding: 8px 11px;
-  }
-
-  #hint {
-    font-size: 13px;
-    padding: 6px 14px;
-    top: 10px;
-    left: 8px;
-    transform: none;
-    max-width: 52vw;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  #selector {
-    bottom: 10px;
-    padding: 8px 10px;
-    gap: 7px;
-    border-radius: 18px;
-  }
-
-  .fw-item {
-    padding: 6px 8px;
-    border-radius: 13px;
-  }
-
-  .fw-emoji {
-    font-size: 24px;
-  }
-
-  .fw-name {
-    font-size: 11px;
-  }
-}
-
-/* ---------- 手机横屏 / 矮屏 ---------- */
 @media (max-height: 500px) {
-  #topbar {
-    top: 6px;
-    right: 6px;
+  .home-grid {
+    grid-template-columns: repeat(3, 1fr);
+    align-content: start;
   }
-
-  .tool-btn {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
-
-  #hint {
-    display: none;
-  }
-
-  #selector {
-    bottom: 6px;
-    padding: 5px 8px;
-    gap: 6px;
-  }
-
-  .fw-item {
-    padding: 4px 7px;
-    flex-direction: row;
-    gap: 4px;
-  }
-
-  .fw-emoji {
-    font-size: 20px;
-  }
-
-  .fw-name {
-    font-size: 11px;
-  }
+  .app-card { min-height: 100px; }
+  .card-emoji { font-size: 34px; }
 }

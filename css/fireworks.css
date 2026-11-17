@@ -1,0 +1,141 @@
+/* ---------- 烟花模块 ---------- */
+#sky {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+#fw-hint {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  padding: 8px 18px;
+  background: rgba(20, 20, 50, 0.45);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+  animation: fwHintFloat 2.5s ease-in-out infinite;
+  white-space: nowrap;
+  z-index: 5;
+}
+
+@keyframes fwHintFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+#fw-auto {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 6;
+}
+
+#fw-auto span {
+  margin-left: 4px;
+}
+
+#selector {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(20, 20, 50, 0.55);
+  border-radius: 22px;
+  backdrop-filter: blur(8px);
+  max-width: 94%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  z-index: 6;
+}
+
+#selector::-webkit-scrollbar {
+  display: none;
+}
+
+.fw-item {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.fw-item:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.fw-item.selected {
+  border-color: #ffd93d;
+  background: rgba(255, 217, 61, 0.22);
+  box-shadow: 0 0 12px rgba(255, 217, 61, 0.5);
+}
+
+.fw-emoji {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.fw-name {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* ---------- 小屏 ---------- */
+@media (max-width: 600px) {
+  #fw-hint {
+    font-size: 13px;
+    padding: 6px 14px;
+    top: 10px;
+    left: 10px;
+    transform: none;
+    max-width: 46vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  @keyframes fwHintFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  #fw-auto {
+    top: 8px;
+    right: 8px;
+    font-size: 13px;
+    padding: 8px 11px;
+  }
+  #selector {
+    bottom: 10px;
+    padding: 8px 10px;
+    gap: 7px;
+    border-radius: 18px;
+  }
+  .fw-item { padding: 6px 8px; border-radius: 13px; }
+  .fw-emoji { font-size: 24px; }
+  .fw-name { font-size: 11px; }
+}
+
+@media (max-height: 500px) {
+  #fw-hint { display: none; }
+  #selector {
+    bottom: 6px;
+    padding: 5px 8px;
+    gap: 6px;
+  }
+  .fw-item { padding: 4px 7px; flex-direction: row; gap: 4px; }
+  .fw-emoji { font-size: 20px; }
+  .fw-name { font-size: 11px; }
+}
