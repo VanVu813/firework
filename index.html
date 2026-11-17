@@ -8,9 +8,23 @@
 </head>
 <body>
   <canvas id="sky"></canvas>
+
+  <!-- 顶部工具栏 -->
+  <div id="topbar">
+    <button id="btn-auto" class="tool-btn" title="自动烟花秀 Auto Show">🎆<span data-i18n="autoShow">自动秀</span></button>
+    <button id="btn-sound" class="tool-btn" title="声音 Sound">🔊</button>
+    <button id="btn-lang" class="tool-btn" title="Language 语言">中/EN</button>
+  </div>
+
+  <!-- 烟花选择栏 -->
+  <div id="selector"></div>
+
+  <!-- 提示语 -->
+  <div id="hint" data-i18n="hint">点按天空，放烟花！🎇</div>
+
   <script src="js/fireworks.js"></script>
   <script src="js/audio.js"></script>
-  <script src="js/ui.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/ui.js"></script>
 </body>
 </html>
