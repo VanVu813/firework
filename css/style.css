@@ -139,6 +139,13 @@ html, body {
   50% { transform: translateX(-50%) translateY(-5px); }
 }
 
+@media (max-width: 600px) {
+  @keyframes hintFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+}
+
 /* ---------- 小屏手机竖屏 ---------- */
 @media (max-width: 600px) {
   #topbar {
@@ -156,7 +163,9 @@ html, body {
     font-size: 13px;
     padding: 6px 14px;
     top: 10px;
-    max-width: 60vw;
+    left: 8px;
+    transform: none;
+    max-width: 52vw;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
