@@ -127,13 +127,14 @@ function applyShellLang() {
   document.querySelectorAll('#shell-bar [data-i18n]').forEach(el => {
     el.textContent = App.t(el.dataset.i18n);
   });
-  document.getElementById('btn-back').classList.toggle(
-    'hidden', (location.hash || '#/home') === '#/home'
-  );
+  const onHome = (location.hash || '#/home') === '#/home' || location.hash === '';
+  document.getElementById('btn-back').classList.toggle('hidden', onHome);
+  document.getElementById('btn-home').classList.toggle('hidden', onHome);
 }
 
 function initShell() {
   document.getElementById('btn-back').addEventListener('click', () => Router.back());
+  document.getElementById('btn-home').addEventListener('click', () => Router.go('#/home'));
   document.getElementById('btn-sound').addEventListener('click', () => {
     AudioEngine.enabled = !AudioEngine.enabled;
     applyShellLang();
@@ -144,6 +145,6 @@ function initShell() {
 }
 
 mergeI18n({
-  zh: { appName: '儿童乐园' },
-  en: { appName: 'Kids Land' },
+  zh: { appName: '儿童乐园', back: '返回', home: '首页' },
+  en: { appName: 'Kids Land', back: 'Back', home: 'Home' },
 });

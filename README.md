@@ -18,7 +18,7 @@ Big-icon launcher; learned-letters progress shown on the ABC card.
 
 ## 🔤 学字母 ABC Land（字母墙 / 学习 / 描红 / 考试，一个应用全包）
 
-字母显示使用**手写体**（Patrick Hand，iPad 上回退 Chalkboard SE/Comic Sans），小写 a/g 等为单层书写字形，贴近孩子手写作业的字母形状。
+字母显示使用**手写体**（Patrick Hand，字体文件本地化，完全离线可用；iPad 上另有 Chalkboard SE/Comic Sans 系统回退），小写 a/g 等为单层书写字形，贴近孩子手写作业的字母形状。
 
 - **字母墙**：A–Z 大格子，学过的盖 ⭐ 章（本地记忆进度）；右上角"去考试"直达测验
 - **学习页**：大写金色/小写蓝色点读发音，单词卡 emoji 配图（点卡片听单词读音），中英对照

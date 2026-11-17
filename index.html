@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>儿童乐园 Kids Land</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎆</text></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/fireworks.css">
   <link rel="stylesheet" href="css/abc.css">
@@ -15,7 +12,8 @@
 <body>
   <!-- 应用外壳顶栏 -->
   <header id="shell-bar">
-    <button id="btn-back" class="tool-btn hidden">←</button>
+    <button id="btn-back" class="tool-btn nav-btn hidden">← <span data-i18n="back">返回</span></button>
+    <button id="btn-home" class="tool-btn nav-btn hidden">🏠 <span data-i18n="home">首页</span></button>
     <div id="shell-title">🎆 <span data-i18n="appName">儿童乐园</span></div>
     <div class="bar-spacer"></div>
     <button id="btn-sound" class="tool-btn" title="Sound 声音">🔊</button>
