@@ -84,20 +84,27 @@ function drawHills() {
   ctx.fill();
 }
 
-const STEP2_TYPES = ['sakura', 'chrysanthemum', 'rainbowRing'];
-let launchCount = 0;
-
-function launch(tx, ty) {
-  const color = PALETTE[Math.floor(Math.random() * PALETTE.length)];
-  const type = STEP2_TYPES[launchCount++ % STEP2_TYPES.length];
-  rockets.push(new Rocket(W / 2, H * 0.95, tx, ty, color, type));
-  AudioEngine.playLaunch();
-}
+const Game = {
+  selectedType: 'surprise',
+  launch(tx, ty, type) {
+    const color = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+    rockets.push(new Rocket(W / 2, H * 0.95, tx, ty, color, type || this.selectedType));
+    AudioEngine.playLaunch();
+  },
+  // 随机位置发射（自动秀模式用）
+  randomLaunch() {
+    this.launch(
+      W * (0.15 + Math.random() * 0.7),
+      H * (0.15 + Math.random() * 0.45)
+    );
+  },
+};
+window.Game = Game;
 
 function onTap(e) {
   e.preventDefault();
   const p = e.touches ? e.touches[0] : e;
-  launch(p.clientX * devicePixelRatio, p.clientY * devicePixelRatio);
+  Game.launch(p.clientX * devicePixelRatio, p.clientY * devicePixelRatio);
 }
 
 canvas.addEventListener('mousedown', onTap);
