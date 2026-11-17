@@ -1,5 +1,8 @@
 'use strict';
 
+/* 描红用手写体（与页面显示字形一致：单层 a/g） */
+const TRACE_FONT = '"Patrick Hand", "Comic Sans MS", "Chalkboard SE", cursive';
+
 /* ---------- 描红跟写页：沿虚线描字母 ---------- */
 Pages.abcTrace = {
   render(el, letter) {
@@ -50,6 +53,11 @@ Pages.abcTrace = {
 
     this.setup();
     this.bind(el);
+
+    // 网络字体加载完成后重建描红目标（否则字形回退导致描线对不上）
+    document.fonts.ready.then(() => {
+      if (this.canvas && this.canvas.isConnected) this.setup();
+    });
 
     setTimeout(() => Speech.letter(letter), 250);
   },
@@ -123,7 +131,7 @@ Pages.abcTrace = {
     off.height = this.canvas.height;
     const octx = off.getContext('2d');
     const size = Math.min(off.width, off.height) * 0.62;
-    octx.font = `800 ${size}px "Arial Rounded MT Bold", "Comic Sans MS", Arial, sans-serif`;
+    octx.font = `${Math.round(size)}px ${TRACE_FONT}`;
     octx.textAlign = 'center';
     octx.textBaseline = 'middle';
     octx.lineJoin = 'round';
@@ -215,7 +223,7 @@ Pages.abcTrace = {
 
     // 虚线描红引导（粗轮廓 + 虚线描边）
     const size = Math.min(W, H) * 0.62;
-    ctx.font = `800 ${size}px "Arial Rounded MT Bold", "Comic Sans MS", Arial, sans-serif`;
+    ctx.font = `${Math.round(size)}px ${TRACE_FONT}`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.lineJoin = 'round';

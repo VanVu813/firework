@@ -27,6 +27,12 @@ body {
   display: none !important;
 }
 
+/* 手写体：小写 a/g 等为单层书写字形，贴近孩子手写字母 */
+:root {
+  --hand-font: "Patrick Hand", "Comic Sans MS", "Chalkboard SE",
+    "Segoe Print", "Marker Felt", "Bradley Hand", cursive;
+}
+
 /* ---------- 外壳顶栏 ---------- */
 #shell-bar {
   flex: 0 0 auto;
