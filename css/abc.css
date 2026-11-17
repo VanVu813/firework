@@ -1,0 +1,346 @@
+/* ---------- ABC 模块公共 ---------- */
+.abc-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 18px 18px;
+  gap: 14px;
+  overflow: hidden;
+}
+
+.abc-page > * {
+  min-height: 0;
+}
+
+.abc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.abc-title {
+  color: #ffd93d;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.abc-head-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.tool-btn.primary {
+  background: rgba(255, 217, 61, 0.9);
+  color: #4a2c00;
+  font-weight: 700;
+}
+
+/* ---------- 字母墙 ---------- */
+.letter-wall {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+  overflow-y: auto;
+  padding-bottom: 6px;
+  align-content: start;
+}
+
+.wall-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  aspect-ratio: 1;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgba(60, 60, 130, 0.45), rgba(25, 25, 60, 0.55));
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.wall-cell:hover {
+  transform: scale(1.05);
+  border-color: #ffd93d;
+  box-shadow: 0 6px 18px rgba(255, 217, 61, 0.25);
+}
+
+.wall-up {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  color: #ffd93d;
+}
+
+.wall-low {
+  font-size: 26px;
+  color: #8fd3ff;
+}
+
+.wall-star {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 16px;
+}
+
+/* ---------- 学习页 ---------- */
+.learn-page {
+  gap: 10px;
+}
+
+.learn-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.big-letter {
+  display: flex;
+  gap: 18px;
+  width: 100%;
+  justify-content: center;
+}
+
+.bl-half {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 12px 26px;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.bl-half:hover {
+  transform: scale(1.04);
+}
+
+.bl-half:active {
+  transform: scale(0.96);
+}
+
+.bl-up .bl-char {
+  font-size: clamp(72px, 18vh, 150px);
+  font-weight: 800;
+  line-height: 1.05;
+  color: #ffd93d;
+}
+
+.bl-low .bl-char {
+  font-size: clamp(72px, 18vh, 150px);
+  font-weight: 800;
+  line-height: 1.05;
+  color: #8fd3ff;
+}
+
+.bl-tag {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.learn-tip {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 15px;
+}
+
+.word-cards {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 6px 4px 12px;
+  max-width: 100%;
+  scrollbar-width: none;
+}
+
+.word-cards::-webkit-scrollbar {
+  display: none;
+}
+
+.word-card {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 150px;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  padding: 14px 10px;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.word-card:hover {
+  transform: translateY(-4px);
+  border-color: #7bf1a8;
+}
+
+.word-emoji {
+  font-size: 52px;
+  line-height: 1.1;
+}
+
+.word-en {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.word-zh {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.learn-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* ---------- 描红页 ---------- */
+.trace-page {
+  position: relative;
+}
+
+.case-tabs {
+  display: flex;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.case-tab {
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+
+.case-tab.active {
+  background: rgba(255, 217, 61, 0.9);
+  color: #4a2c00;
+}
+
+.trace-body {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#trace-canvas {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  border-radius: 20px;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.trace-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+}
+
+.trace-bar {
+  flex: 1;
+  height: 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.trace-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffd93d, #7bf1a8);
+  transition: width 0.2s;
+}
+
+.trace-pct {
+  color: #ffd93d;
+  font-weight: 700;
+  min-width: 44px;
+  text-align: right;
+}
+
+.trace-done {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 26, 0.72);
+  backdrop-filter: blur(4px);
+  z-index: 5;
+}
+
+.done-bubble {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 34px 44px;
+  border-radius: 28px;
+  background: rgba(40, 40, 90, 0.9);
+  border: 2px solid #ffd93d;
+  animation: donePop 0.4s ease;
+}
+
+@keyframes donePop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.done-text {
+  font-size: 30px;
+  font-weight: 800;
+  color: #ffd93d;
+}
+
+.done-btns {
+  display: flex;
+  gap: 12px;
+}
+
+
+/* ---------- 小屏 ---------- */
+@media (max-width: 600px) {
+  .abc-page { padding: 10px 12px 12px; gap: 10px; }
+  .abc-title { font-size: 16px; }
+  .letter-wall { grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 8px; }
+  .wall-up { font-size: 32px; }
+  .wall-low { font-size: 19px; }
+  .wall-star { font-size: 13px; }
+  .big-letter { gap: 10px; }
+  .bl-half { padding: 8px 16px; border-radius: 18px; }
+  .word-card { width: 118px; padding: 10px 8px; }
+  .word-emoji { font-size: 40px; }
+  .word-en { font-size: 15px; }
+}
+
+@media (max-height: 500px) {
+  .bl-up .bl-char, .bl-low .bl-char { font-size: clamp(48px, 24vh, 90px); }
+  .word-emoji { font-size: 36px; }
+  .word-card { width: 110px; padding: 8px; }
+}
