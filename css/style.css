@@ -27,7 +27,15 @@ body {
   display: none !important;
 }
 
-/* 手写体：小写 a/g 等为单层书写字形，贴近孩子手写字母 */
+/* 手写体：小写 a/g 等为单层书写字形，贴近孩子手写字母（本地字体，完全离线） */
+@font-face {
+  font-family: 'Patrick Hand';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/patrick-hand-latin.woff2') format('woff2');
+}
+
 :root {
   --hand-font: "Patrick Hand", "Comic Sans MS", "Chalkboard SE",
     "Segoe Print", "Marker Felt", "Bradley Hand", cursive;
@@ -78,12 +86,38 @@ body {
   color: #4a2c00;
 }
 
+/* 按压反馈 */
+.tool-btn:active,
+.app-card:active,
+.wall-cell:active,
+.fw-item:active {
+  transform: scale(0.93);
+}
+
+/* 导航按钮更大更易点 */
+.nav-btn {
+  font-size: 17px;
+  font-weight: 700;
+  padding: 11px 18px;
+}
+
 /* ---------- 页面容器 ---------- */
 #page {
   flex: 1;
   min-height: 0;
   position: relative;
   overflow: hidden;
+}
+
+/* 页面切换动画 */
+#page > * {
+  animation: pageIn 0.28s ease;
+  height: 100%;
+}
+
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ---------- 首页启动台 ---------- */
