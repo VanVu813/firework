@@ -91,6 +91,7 @@ function launch(tx, ty) {
   const color = PALETTE[Math.floor(Math.random() * PALETTE.length)];
   const type = STEP2_TYPES[launchCount++ % STEP2_TYPES.length];
   rockets.push(new Rocket(W / 2, H * 0.95, tx, ty, color, type));
+  AudioEngine.playLaunch();
 }
 
 function onTap(e) {
@@ -110,6 +111,7 @@ function loop(t) {
     r.draw(ctx);
     if (arrived) {
       particles.push(...r.explode());
+      AudioEngine.playExplode(r.type === 'dahlia' || r.type === 'surprise');
       return false;
     }
     return true;

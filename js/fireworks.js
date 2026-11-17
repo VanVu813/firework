@@ -33,6 +33,11 @@ class Particle {
         this.vx *= 0.955;
         this.vy *= 0.955;
         break;
+      case 'shape': // 定型：快速阻尼保持形状，再缓缓下飘
+        this.vx *= 0.9;
+        this.vy *= 0.9;
+        this.vy += 0.012;
+        break;
       default: // 'gravity'
         this.vy += this.gravity;
         this.vx *= AIR_RESIST;
@@ -136,7 +141,100 @@ const FireworkTypes = {
     }
     return ps;
   },
+
+  // 💥 大丽花：大范围、多层次、巨响
+  dahlia(x, y) {
+    const ps = [];
+    const layers = 4;
+    for (let l = 0; l < layers; l++) {
+      const count = 60;
+      const baseSpeed = 1.5 + l * 1.1;
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count + l * 0.13;
+        const speed = baseSpeed + Math.random() * 0.5;
+        const hue = [350, 25, 55, 280][l % 4];
+        ps.push(new Particle({
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          color: hsl(hue + Math.random() * 15, 90, 58 + Math.random() * 15),
+          size: 1.8 + Math.random() * 1.4,
+          flicker: l % 2 === 0,
+          gravity: 0.028,
+          decay: 0.006 + Math.random() * 0.005,
+        }));
+      }
+    }
+    return ps;
+  },
+
+  // ❤️ 爱心：粒子组成爱心形状
+  heart(x, y) {
+    const ps = [];
+    const count = 80;
+    const scale = 0.42;
+    for (let i = 0; i < count; i++) {
+      const t = (Math.PI * 2 * i) / count;
+      // 爱心参数方程
+      const hx = 16 * Math.pow(Math.sin(t), 3);
+      const hy = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+      ps.push(new Particle({
+        x: x + hx * scale + (Math.random() - 0.5) * 2,
+        y: y + hy * scale + (Math.random() - 0.5) * 2,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        color: hsl(345 + Math.random() * 15, 90, 60 + Math.random() * 15),
+        size: 2 + Math.random() * 1.2,
+        behavior: 'shape',
+        decay: 0.005 + Math.random() * 0.004,
+      }));
+    }
+    return ps;
+  },
+
+  // 🐟 流星鱼：粒子呈流线型游动 + 摇摆尾巴
+  meteorFish(x, y) {
+    const ps = [];
+    const count = 55;
+    const headAngle = Math.random() * Math.PI * 2;
+    for (let i = 0; i < count; i++) {
+      const ratio = i / count; // 0=头 1=尾
+      const spread = ratio * 14; // 尾巴展开角度
+      const angle = headAngle + (Math.random() - 0.5) * (0.3 + spread * 0.06);
+      const speed = 3.2 - ratio * 1.8 + Math.random() * 0.3;
+      ps.push(new Particle({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        color: hsl(190 + ratio * 60, 90, 60 + Math.random() * 15),
+        size: 2.4 - ratio * 1.2,
+        behavior: 'fall',
+        sway: 0.09,
+        gravity: 0.012,
+        decay: 0.006 + ratio * 0.006,
+      }));
+    }
+    return ps;
+  },
+
+  // 🎁 惊喜盲盒：随机类型 + 随机配色
+  surprise(x, y) {
+    const keys = ['sakura', 'chrysanthemum', 'rainbowRing', 'dahlia', 'heart', 'meteorFish'];
+    const pick = keys[Math.floor(Math.random() * keys.length)];
+    return FireworkTypes[pick](x, y);
+  },
 };
+
+// UI 展示用元数据（双语）
+const FIREWORK_META = [
+  { id: 'sakura', emoji: '🌸', zh: '樱花雨', en: 'Sakura Rain' },
+  { id: 'chrysanthemum', emoji: '✨', zh: '金菊', en: 'Golden Chrys' },
+  { id: 'rainbowRing', emoji: '🌈', zh: '彩虹环', en: 'Rainbow Ring' },
+  { id: 'dahlia', emoji: '💥', zh: '大丽花', en: 'Big Dahlia' },
+  { id: 'heart', emoji: '❤️', zh: '爱心', en: 'Lovely Heart' },
+  { id: 'meteorFish', emoji: '🐟', zh: '流星鱼', en: 'Meteor Fish' },
+  { id: 'surprise', emoji: '🎁', zh: '惊喜盲盒', en: 'Surprise!' },
+];
 
 class Rocket {
   constructor(sx, sy, tx, ty, color, type) {
